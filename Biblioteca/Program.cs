@@ -27,14 +27,29 @@ namespace Biblioteca
                 Anio = anio;
             }   
 
+            // Sobreescribir el método ToString()
             public override string ToString()
             {
-                return $"Titulo: {Titulo}\nAutor: {Autor}\nAño de Publicación: {Anio}\n";
+                return $"\nTitulo: {Titulo}\nAutor: {Autor}\nAño de Publicación: {Anio}\n" + new string('-',20);
             }
         }
+
         static void Main(string[] args)
         {
-            ArrayList libros = new ArrayList()
+
+            //int[] numeros = { 1, 2, 3, 4, 5, 6 };
+
+            //Libro[] libros2 =
+            //{
+            //   new Libro("Harry Potter", "Jk Rolling", "N/A", 1990),
+            //   new Libro("Harry Potter", "Jk Rolling", "N/A", 1990)
+            //}; 
+
+            // Esto es un Array.
+
+            //ArrayList numeros = new ArrayList() { 1,2,3,4,5,6,7,8,9,10 };
+
+            ArrayList libros = new ArrayList() // Esto es un Array List.
             {
                 new Libro("El Principito", "Antonie de Saint-Exupéry", "Reynal & Hitchcock", 1943),
                 new Libro("Moby Dick", "Herman Melville", "Harper & Brothers", 1851)
@@ -65,16 +80,32 @@ namespace Biblioteca
                     int anio = int.Parse(Console.ReadLine());
 
                     Libro newLibro = new Libro(titulo, autor, editorial, anio);
-                    libros.Add(newLibro);
+
+                    if (!string.IsNullOrEmpty(newLibro.Titulo) && !string.IsNullOrEmpty(newLibro.Autor) && !string.IsNullOrEmpty(newLibro.Editorial))
+                    {
+                        libros.Add(newLibro);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nEl titulo, autor y editorial son requeridos para poder almacenar un libro\n");
+                    }
+
+                    //libros.Add(new Libro(titulo, autor, editorial, anio));
                 }
                 else if(opcion == 2)
                 {
-                    Console.WriteLine("Listado de libros");
+                    Console.WriteLine("\nListado de libros\n");
 
-                    foreach(var libro in libros)
+                    // foreach
+                    foreach (var libro in libros)
                     {
                         Console.WriteLine(libro.ToString());
                     }
+
+                    //var numero = "10"; // int
+                    //var mensaje = "Hola mundo"; // string
+                    //var funciona = true; // booleano
+
 
                     //for (int i = 0; i < libros.Count; i++)
                     //{
@@ -90,7 +121,7 @@ namespace Biblioteca
 
                     foreach(Libro libro in libros)
                     {
-                        if (libro.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
+                        if (libro.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase)) // libro.Titulo == titulo
                         {
                             libros.Remove(libro);
                             encontrado = true;
@@ -118,6 +149,6 @@ namespace Biblioteca
             Console.ReadLine();
         }
 
-
+        // CRUD -- CREATE, READ, UPDATE, DELETE
     }
 }
